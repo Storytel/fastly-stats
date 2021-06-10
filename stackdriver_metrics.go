@@ -391,6 +391,15 @@ var MetricDescriptors = []*metric.MetricDescriptor{
 		DisplayName: "HTTP Status 204",
 	},
 	{
+		Name:        "status_206",
+		Type:        "custom.googleapis.com/fastly/status_206",
+		MetricKind:  metric.MetricDescriptor_GAUGE,
+		ValueType:   metric.MetricDescriptor_INT64,
+		Unit:        "1/s",
+		Description: "Number of responses sent with status code 206 (Partial Content).",
+		DisplayName: "HTTP Status 206",
+	},
+	{
 		Name:        "status_301",
 		Type:        "custom.googleapis.com/fastly/status_301",
 		MetricKind:  metric.MetricDescriptor_GAUGE,
