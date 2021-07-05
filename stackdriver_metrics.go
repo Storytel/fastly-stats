@@ -1,4 +1,4 @@
-package fastlystackdriver
+package fastlystats
 
 import "google.golang.org/genproto/googleapis/api/metric"
 

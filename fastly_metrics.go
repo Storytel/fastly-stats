@@ -1,4 +1,4 @@
-package fastlystackdriver
+package fastlystats
 
 import (
 	"reflect"

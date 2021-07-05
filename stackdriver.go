@@ -1,4 +1,4 @@
-package fastlystackdriver
+package fastlystats
 
 import (
 	"context"
@@ -115,11 +115,6 @@ func (s *StackdriverExporter) timeSeries(stats *FastlyMeanStats) []*monitoringpb
 		field := t.Field(i)
 		metricName := field.Tag.Get("mapstructure")
 
-		if metricName == "hit_ratio" {
-			// skip - this is built synthetically instead
-			continue
-		}
-
 		metricKind := metric.MetricDescriptor_GAUGE
 
 		valueType := metric.MetricDescriptor_VALUE_TYPE_UNSPECIFIED
@@ -186,34 +181,6 @@ func (s *StackdriverExporter) sendTimeSeries(
 	return nil
 }
 
-func (s *StackdriverExporter) syntheticTimeSeries(
-	ctx context.Context,
-	monitoredResource *monitoredres.MonitoredResource,
-	data *FastlyMeanStats,
-) error {
-
-	var timeSeries []*monitoringpb.TimeSeries
-
-	timeSeries = append(timeSeries, &monitoringpb.TimeSeries{
-		Metric: &metric.Metric{
-			Type: "custom.googleapis.com/fastly/hit_ratio",
-		},
-		MetricKind: metric.MetricDescriptor_GAUGE,
-		ValueType:  metric.MetricDescriptor_DOUBLE,
-		Points: []*monitoringpb.Point{
-			{
-				Value: &monitoringpb.TypedValue{
-					Value: &monitoringpb.TypedValue_DoubleValue{
-						DoubleValue: float64(data.Stats.Hits) / float64(data.Stats.Requests),
-					},
-				},
-			},
-		},
-	})
-
-	return s.sendTimeSeries(ctx, data.IntervalStart, data.IntervalEnd, monitoredResource, timeSeries)
-}
-
 func (s *StackdriverExporter) timeSeriesWorker(ctx context.Context) {
 	ll := zap.S().With("type", "producer")
 
@@ -234,10 +201,6 @@ func (s *StackdriverExporter) timeSeriesWorker(ctx context.Context) {
 					"namespace":  "fastly",
 					"node_id":    "global",
 				},
-			}
-
-			if err := s.syntheticTimeSeries(ctx, monitoredResource, meanStats); err != nil {
-				ll.Warnf("failed to send realtime data time series: %v", err)
 			}
 
 			if err := s.sendTimeSeries(ctx, meanStats.IntervalStart, meanStats.IntervalEnd, monitoredResource, s.timeSeries(meanStats)); err != nil {

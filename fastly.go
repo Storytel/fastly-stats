@@ -1,4 +1,4 @@
-package fastlystackdriver
+package fastlystats
 
 import (
 	"context"
@@ -74,8 +74,7 @@ func (f *FastlyStatsProvider) mean(list []*fastly.RealtimeData) *FastlyMeanStats
 	stats := &fastly.Stats{}
 	n := uint64(len(list))
 
-	var min uint64 = math.MaxUint64
-	var max uint64 = 0
+	var min, max uint64 = math.MaxUint64, 0
 
 	refStats := reflect.ValueOf(stats)
 
@@ -110,6 +109,9 @@ func (f *FastlyStatsProvider) mean(list []*fastly.RealtimeData) *FastlyMeanStats
 			f.SetFloat(f.Float() / float64(n))
 		}
 	}
+
+	// Hit Ratio is not set in RT API, build it synthetically
+	stats.HitRatio = float64(stats.Hits) / float64(stats.Requests)
 
 	return &FastlyMeanStats{
 		IntervalStart: min,
