@@ -119,12 +119,12 @@ func main() {
 
 	go func() {
 		defer wg.Done()
-		// defer cancel()
-		// consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, consumers[0])
-		// if err != nil {
-		// 	ll.Fatal(err)
-		// }
-		// consumer.Run(ctx)
+		defer cancel()
+		consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, consumers[0])
+		if err != nil {
+			ll.Fatal(err)
+		}
+		consumer.Run(ctx)
 	}()
 
 	go func() {
