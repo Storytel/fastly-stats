@@ -1,4 +1,4 @@
-FROM golang:1.16.4-alpine3.13 as builder
+FROM golang:1.18.2-alpine3.15 as builder
 RUN apk add git
 
 WORKDIR /build
@@ -10,7 +10,7 @@ COPY cmd cmd/
 
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" ./cmd/runner
 
-FROM alpine:3.13
+FROM alpine:3.15
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 COPY --from=builder /build/runner /
 RUN touch .env
