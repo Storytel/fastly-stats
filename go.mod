@@ -7,7 +7,7 @@ require (
 	github.com/fastly/go-fastly/v3 v3.7.0
 	github.com/joho/godotenv v1.3.0
 	github.com/sethvargo/go-envconfig v0.3.5
-	go.uber.org/zap v1.16.0
+	go.uber.org/zap v1.21.0
 	google.golang.org/genproto v0.0.0-20210524171403-669157292da3
 	google.golang.org/grpc v1.37.1
 	google.golang.org/protobuf v1.26.0
@@ -23,8 +23,8 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.0.0-20170211013415-3573b8b52aa7 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20170523030023-d0303fe80992 // indirect
 	go.opencensus.io v0.23.0 // indirect
-	go.uber.org/atomic v1.6.0 // indirect
-	go.uber.org/multierr v1.5.0 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/multierr v1.6.0 // indirect
 	golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420 // indirect
 	golang.org/x/oauth2 v0.0.0-20210514164344-f6687ab2804c // indirect
 	golang.org/x/sys v0.0.0-20210510120138-977fb7262007 // indirect
