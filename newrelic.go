@@ -119,5 +119,3 @@ func (n *NewRelicExporter) Run(ctx context.Context) {
 		}
 	}
 }
-
-// func (

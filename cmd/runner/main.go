@@ -90,9 +90,10 @@ func main() {
 		ll.Fatal("Fastly Service is missing, set env FASTLY_SERVICE")
 	}
 
-	if cfg.NewRelicInsertKey == "" {
-		ll.Fatal("New Relic insert key is missing, set env NEWRELIC_INSERT_KEY")
-	}
+	var (
+		useStackdriver = true
+		useNewRelic    = cfg.NewRelicInsertKey != ""
+	)
 
 	ch := make(chan *fastlystats.FastlyMeanStats)
 
@@ -101,15 +102,22 @@ func main() {
 		ll.Fatal(err)
 	}
 
-	consumers := []chan *fastlystats.FastlyMeanStats{
-		make(chan *fastlystats.FastlyMeanStats, 1024),
-		make(chan *fastlystats.FastlyMeanStats, 1024),
+	var consumers []chan *fastlystats.FastlyMeanStats
+	if useStackdriver {
+		consumers = append(consumers, make(chan *fastlystats.FastlyMeanStats, 1024))
+	}
+	if useNewRelic {
+		consumers = append(consumers, make(chan *fastlystats.FastlyMeanStats, 1024))
 	}
 
 	go multiplexChannel(ctx, ch, consumers)
 
 	wg := sync.WaitGroup{}
-	wg.Add(len(consumers) + 1)
+	wg.Add(len(consumers) + 1) // + 1 for the Fastly provider
+
+	if len(consumers) == 0 {
+		ll.Fatal("No consumers enabled. Add appropriate keys to env to enable consumers")
+	}
 
 	go func() {
 		defer wg.Done()
@@ -117,25 +125,29 @@ func main() {
 		provider.Run(ctx)
 	}()
 
-	go func() {
-		defer wg.Done()
-		defer cancel()
-		consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, consumers[0])
-		if err != nil {
-			ll.Fatal(err)
-		}
-		consumer.Run(ctx)
-	}()
+	if useStackdriver {
+		go func() {
+			defer wg.Done()
+			defer cancel()
+			consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, consumers[0])
+			if err != nil {
+				ll.Fatal(err)
+			}
+			consumer.Run(ctx)
+		}()
+	}
 
-	go func() {
-		defer wg.Done()
-		defer cancel()
-		consumer, err := fastlystats.NewNewRelicExporter(cfg.NewRelicInsertKey, consumers[1])
-		if err != nil {
-			ll.Fatal(err)
-		}
-		consumer.Run(ctx)
-	}()
+	if useNewRelic {
+		go func() {
+			defer wg.Done()
+			defer cancel()
+			consumer, err := fastlystats.NewNewRelicExporter(cfg.NewRelicInsertKey, consumers[1])
+			if err != nil {
+				ll.Fatal(err)
+			}
+			consumer.Run(ctx)
+		}()
+	}
 
 	wg.Wait()
 }
