@@ -10,7 +10,7 @@ require (
 	go.uber.org/zap v1.21.0
 	google.golang.org/genproto v0.0.0-20210524171403-669157292da3
 	google.golang.org/grpc v1.37.1
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/protobuf v1.28.0
 )
 
 require (
