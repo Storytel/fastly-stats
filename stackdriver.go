@@ -35,6 +35,7 @@ type StackdriverExporter struct {
 	ch                 <-chan *FastlyMeanStats
 	timeSeriesCh       chan *monitoringpb.TimeSeries
 	googleCloudProject string
+	nodeID             string
 }
 
 func SetupMetricDescriptors(ctx context.Context, googleCloudProject string) {
@@ -66,7 +67,7 @@ func SetupMetricDescriptors(ctx context.Context, googleCloudProject string) {
 	}
 }
 
-func NewStackdriverExporter(project string, ch <-chan *FastlyMeanStats) (*StackdriverExporter, error) {
+func NewStackdriverExporter(project string, nodeID string, ch <-chan *FastlyMeanStats) (*StackdriverExporter, error) {
 	metricClient, err := monitoring.NewMetricClient(context.Background())
 	if err != nil {
 		return nil, err
@@ -77,6 +78,7 @@ func NewStackdriverExporter(project string, ch <-chan *FastlyMeanStats) (*Stackd
 		ch:                 ch,
 		timeSeriesCh:       make(chan *monitoringpb.TimeSeries, timeSeriesBatchSize),
 		googleCloudProject: project,
+		nodeID:             nodeID,
 	}, nil
 }
 
@@ -199,7 +201,7 @@ func (s *StackdriverExporter) timeSeriesWorker(ctx context.Context) {
 					"project_id": s.googleCloudProject,
 					"location":   "global",
 					"namespace":  "fastly",
-					"node_id":    "global",
+					"node_id":    s.nodeID,
 				},
 			}
 
