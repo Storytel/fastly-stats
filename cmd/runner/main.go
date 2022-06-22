@@ -129,7 +129,7 @@ func main() {
 		go func() {
 			defer wg.Done()
 			defer cancel()
-			consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, consumers[0])
+			consumer, err := fastlystats.NewStackdriverExporter(googleCloudProject, cfg.FastlyService, consumers[0])
 			if err != nil {
 				ll.Fatal(err)
 			}
