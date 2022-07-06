@@ -111,7 +111,7 @@ func (f *FastlyStatsProvider) mean(list []*fastly.RealtimeData) *FastlyMeanStats
 	}
 
 	// Hit Ratio is not set in RT API, build it synthetically
-	stats.HitRatio = float64(stats.Hits) / float64(stats.Requests)
+	stats.HitRatio = float64(stats.Hits) / float64(stats.Hits+stats.Miss)
 
 	return &FastlyMeanStats{
 		IntervalStart: min,
