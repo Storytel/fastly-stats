@@ -22,3 +22,19 @@ docker run --rm -it --volumes-from gcloud-config -e GOOGLE_APPLICATION_CREDENTIA
 
 [google-cloud-sdk]: https://hub.docker.com/r/google/cloud-sdk/
 [fastly-api-key]: https://docs.fastly.com/en/guides/using-api-tokens
+
+## Release
+
+The release process is manual (fow now).
+
+Create a git tag with the next version number and push it to origin.
+```sh
+git tag vX.Y.Z
+git push origin v1.5.0
+```
+
+Build the docker image and push it to Docker Hub.
+```sh
+docker build -t storytel/fastly-stats:v1.5.0 .
+docker push storytel/fastly-stats:v1.5.0
+```
