@@ -3,12 +3,12 @@ module github.com/Storytel/fastly-stackdriver-exporter
 go 1.18
 
 require (
-	cloud.google.com/go/monitoring v1.8.0
+	cloud.google.com/go/monitoring v1.9.0
 	github.com/fastly/go-fastly/v3 v3.12.0
 	github.com/joho/godotenv v1.4.0
 	github.com/sethvargo/go-envconfig v0.8.2
 	go.uber.org/zap v1.23.0
-	google.golang.org/genproto v0.0.0-20221027153422-115e99e71e1c
+	google.golang.org/genproto v0.0.0-20221109142239-94d6d90a7d66
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
 )
@@ -22,7 +22,7 @@ require (
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/jsonapi v0.0.0-20201022225600-f822737867f6 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
-	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
+	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.0.0-20170211013415-3573b8b52aa7 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20170523030023-d0303fe80992 // indirect
 	go.opencensus.io v0.23.0 // indirect
