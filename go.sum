@@ -5,8 +5,8 @@ cloud.google.com/go/compute v1.12.1/go.mod h1:e8yNOBcBONZU1vJKCvCoDw/4JQsA0dpM4x
 cloud.google.com/go/compute/metadata v0.2.1 h1:efOwf5ymceDhK6PKMnnrTHP4pppY5L22mle96M1yP48=
 cloud.google.com/go/compute/metadata v0.2.1/go.mod h1:jgHgmJd2RKBGzXqF5LR2EZMGxBkeanZ9wwa75XHJgOM=
 cloud.google.com/go/longrunning v0.3.0 h1:NjljC+FYPV3uh5/OwWT6pVU+doBqMg2x/rZlE+CamDs=
-cloud.google.com/go/monitoring v1.9.1 h1:y9g09cWAQaX3ZYscR/nfaFUXtuyRqD2+i0jTOw0BZFI=
-cloud.google.com/go/monitoring v1.9.1/go.mod h1:iFzRDMSDMvvf/z30Ge1jwtuEe/jlPPAFusmvCkUdo+o=
+cloud.google.com/go/monitoring v1.10.0 h1:vHNTf7zngat+QR9K1EaURydIaBrNyFsPuY7k2c7EXAE=
+cloud.google.com/go/monitoring v1.10.0/go.mod h1:iFzRDMSDMvvf/z30Ge1jwtuEe/jlPPAFusmvCkUdo+o=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9 h1:fJ4XPqxuZfm11zauw9XX7c30P8xwDyucdWu8H6Htrxs=
 github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
