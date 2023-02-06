@@ -5,7 +5,7 @@ go 1.18
 require (
 	cloud.google.com/go/monitoring v1.12.0
 	github.com/fastly/go-fastly/v3 v3.12.0
-	github.com/joho/godotenv v1.4.0
+	github.com/joho/godotenv v1.5.1
 	github.com/sethvargo/go-envconfig v0.8.3
 	go.uber.org/zap v1.24.0
 	google.golang.org/genproto v0.0.0-20230112194545-e10362b5ecf9
