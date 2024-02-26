@@ -7,7 +7,7 @@ require (
 	github.com/fastly/go-fastly/v3 v3.12.0
 	github.com/joho/godotenv v1.5.1
 	github.com/sethvargo/go-envconfig v0.9.0
-	go.uber.org/zap v1.26.0
+	go.uber.org/zap v1.27.0
 	google.golang.org/genproto v0.0.0-20240125205218-1f4bbc51befe
 	google.golang.org/genproto/googleapis/api v0.0.0-20240205150955-31a09d347014
 	google.golang.org/grpc v1.61.1
