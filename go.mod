@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/monitoring v1.18.1
 	github.com/fastly/go-fastly/v3 v3.12.0
 	github.com/joho/godotenv v1.5.1
-	github.com/sethvargo/go-envconfig v0.9.0
+	github.com/sethvargo/go-envconfig v1.0.1
 	go.uber.org/zap v1.27.0
 	google.golang.org/genproto v0.0.0-20240227224415-6ceb2ff114de
 	google.golang.org/genproto/googleapis/api v0.0.0-20240311132316-a219d84964c2
