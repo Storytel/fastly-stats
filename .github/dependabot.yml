@@ -1,19 +1,21 @@
 version: 2
 updates:
-- package-ecosystem: gomod
-  directory: "/"
-  schedule:
-    interval: weekly
-    time: "08:00"
-  open-pull-requests-limit: 3
-  reviewers:
-    - "Storytel/cxp-backend-listening-reading"
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "08:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "Storytel/cxp-backend-listening-reading"
 
-- package-ecosystem: docker
-  directory: "/"
-  schedule:
-    interval: weekly
-    time: "08:00"
-  open-pull-requests-limit: 3
-  reviewers:
-    - "Storytel/cxp-backend-listening-reading"
+    cooldown:
+      default-days: 21
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "08:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "Storytel/cxp-backend-listening-reading"
