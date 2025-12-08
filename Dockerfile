@@ -10,7 +10,7 @@ COPY cmd cmd/
 
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" ./cmd/runner
 
-FROM alpine:3.22.2
+FROM alpine:3.23.0
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 COPY --from=builder /build/runner /
 RUN touch .env
