@@ -3,7 +3,7 @@ module github.com/Storytel/fastly-stackdriver-exporter
 go 1.25.0
 
 require (
-	cloud.google.com/go/monitoring v1.27.0
+	cloud.google.com/go/monitoring v1.28.0
 	github.com/fastly/go-fastly/v3 v3.12.0
 	github.com/joho/godotenv v1.5.1
 	github.com/sethvargo/go-envconfig v0.9.0
