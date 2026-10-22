@@ -1,27 +1,38 @@
 version: 2
+
+# Monthly grouped updates (dependabot-auto flow). One PR per month across all
+# ecosystems, auto-merged on green CI; Press fixes it on red CI.
+# Security updates are not part of the monthly PR: npm security updates are
+# grouped per directory, other ecosystems arrive as individual PRs.
+multi-ecosystem-groups:
+  monthly:
+    schedule:
+      interval: cron
+      cronjob: "0 5 4 * *"
+    labels:
+      - dependencies
+      - dependabot-auto
+
 updates:
   - package-ecosystem: gomod
-    directory: "/"
-    schedule:
-      interval: weekly
-      time: "08:00"
-    open-pull-requests-limit: 3
-    reviewers:
-      - "Storytel/cxp-backend-listening-reading"
-
+    directory: /
+    patterns: ["*"]
+    multi-ecosystem-group: monthly
+    labels: [dependencies, dependabot-auto]
     cooldown:
       default-days: 21
+      exclude: ["github.com/Storytel/*", "github.com/storytel/*"]
   - package-ecosystem: docker
-    directory: "/"
-    schedule:
-      interval: weekly
-      time: "08:00"
-    open-pull-requests-limit: 3
-    reviewers:
-      - "Storytel/cxp-backend-listening-reading"
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: weekly
+    directory: /
+    patterns: ["*"]
+    multi-ecosystem-group: monthly
+    labels: [dependencies, dependabot-auto]
+    cooldown:
+      default-days: 21
+  - package-ecosystem: github-actions
+    directory: /
+    patterns: ["*"]
+    multi-ecosystem-group: monthly
+    labels: [dependencies, dependabot-auto]
     cooldown:
       default-days: 21
